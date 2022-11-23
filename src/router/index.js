@@ -1,11 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+//import Home from '../views/Home.vue'
+import Quicks from '../views/Quicks.vue'
+import Layout from '../layout/Layout.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: Layout,
+    children:[
+      {
+        path: "/",
+        name: "Quicks",
+        component: Quicks
+      }
+    ]
   },
   {
     path: '/about',
@@ -19,7 +27,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior(to) {
+    if (to.hash) {
+      
+      console.log("to hash =", to)
+      
+    }
+  }
 })
 
 export default router
